@@ -18,7 +18,7 @@ This repository contains my solutions to the Advent of Code 2024 challenges, wri
 aoc -n 1
 ```
 >day01/input.txt
-* Day 1 of 2023
+* Day 1 of 2023 with custom filename, output to current working directory
 ```sh
 aoc -n 1 -y 2023 -o file.txt --dir .
 ```
