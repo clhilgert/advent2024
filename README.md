@@ -12,7 +12,8 @@ This repository contains my solutions to the Advent of Code 2024 challenges, wri
 - -o (string, optional): Output filename (default 'input.txt')
 - --dir (string, optional): Output directory (default: day01 - day25, based on -n flag)
 
-#### Examples:
+#### Examples/Usage:
+*The `SESSION_COOKIE` environment variable must be set, either in the shell or in a .env file.*
 * Day 1 default
 ```sh
 aoc -n 1
