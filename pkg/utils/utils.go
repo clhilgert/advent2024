@@ -17,7 +17,7 @@ func FetchInput(day, year int, outFile, outDir string) {
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		handleError(fmt.Errorf("Error creating request: %v", err))
+		handleError(fmt.Errorf("error creating request: %v", err))
 	}
 
 	sessionCookie := getSessionCookie()
@@ -29,7 +29,7 @@ func FetchInput(day, year int, outFile, outDir string) {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		handleError(fmt.Errorf("Error fetching input for day %d: %v", day, err))
+		handleError(fmt.Errorf("error fetching input for day %d: %v", day, err))
 	}
 	defer resp.Body.Close()
 
@@ -37,13 +37,13 @@ func FetchInput(day, year int, outFile, outDir string) {
 
 	file, err := os.Create(filePath)
 	if err != nil {
-		handleError(fmt.Errorf("Error creating file %s: %v\n", filePath, err))
+		handleError(fmt.Errorf("error creating file %s: %v", filePath, err))
 	}
 	defer file.Close()
 
 	_, err = io.Copy(file, resp.Body)
 	if err != nil {
-		handleError(fmt.Errorf("Error writing input to file %s: %v\n", filePath, err))
+		handleError(fmt.Errorf("error writing input to file %s: %v", filePath, err))
 	}
 
 	fmt.Printf("Successfully fetched input for day %d and saved to %s\n", day, filePath)
@@ -53,7 +53,7 @@ func getSessionCookie() string {
 	godotenv.Load()
 	sessionCookie := os.Getenv("SESSION_COOKIE")
 	if sessionCookie == "" {
-		handleError(fmt.Errorf("Error: SESSION_COOKIE not set"))
+		handleError(fmt.Errorf("error: SESSION_COOKIE not set"))
 	}
 	return sessionCookie
 }
