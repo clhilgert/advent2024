@@ -10,8 +10,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func FetchInput(day int) {
-	url := fmt.Sprintf("https://adventofcode.com/2024/day/%d/input", day)
+func FetchInput(day, year int, outFile, outDir string) {
+	url := fmt.Sprintf("https://adventofcode.com/%d/day/%d/input", year, day)
 
 	client := &http.Client{}
 
@@ -33,8 +33,7 @@ func FetchInput(day int) {
 	}
 	defer resp.Body.Close()
 
-	dirName := fmt.Sprintf("day%02d", day)
-	filePath := filepath.Join(dirName, "input.txt")
+	filePath := filepath.Join(outDir, outFile)
 
 	file, err := os.Create(filePath)
 	if err != nil {
@@ -51,11 +50,7 @@ func FetchInput(day int) {
 }
 
 func getSessionCookie() string {
-	err := godotenv.Load()
-	if err != nil {
-		handleError(fmt.Errorf("Error loading .env"))
-	}
-
+	godotenv.Load()
 	sessionCookie := os.Getenv("SESSION_COOKIE")
 	if sessionCookie == "" {
 		handleError(fmt.Errorf("Error: SESSION_COOKIE not set"))
