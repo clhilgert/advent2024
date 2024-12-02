@@ -2,10 +2,12 @@ package utils
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
 	"runtime"
+	"strconv"
 	"strings"
 )
 
@@ -44,4 +46,26 @@ func SliceFromInput() []string {
 		lines = append(lines, row)
 	}
 	return lines
+}
+
+func AbsInt(n int) int {
+	if n < 0 {
+		return -n
+	}
+	return n
+}
+
+func ParseLineToInts(line string) ([]int, error) {
+	strNums := strings.Fields(line)
+	nums := make([]int, len(strNums))
+
+	for i, str := range strNums {
+		num, err := strconv.Atoi(str)
+		if err != nil {
+			return nil, fmt.Errorf("error converting '%s' to int: %w", str, err)
+		}
+		nums[i] = num
+	}
+
+	return nums, nil
 }
